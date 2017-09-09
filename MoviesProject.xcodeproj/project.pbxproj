@@ -11,12 +11,12 @@
 		4E814EBC1F63E7FB0025AF0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EBB1F63E7FB0025AF0A /* main.m */; };
 		4E814EBF1F63E7FB0025AF0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EBE1F63E7FB0025AF0A /* AppDelegate.m */; };
 		4E814EC21F63E7FB0025AF0A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EC11F63E7FB0025AF0A /* ViewController.m */; };
-		4E814EC51F63E7FB0025AF0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E814EC31F63E7FB0025AF0A /* Main.storyboard */; };
 		4E814EC71F63E7FB0025AF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E814EC61F63E7FB0025AF0A /* Assets.xcassets */; };
 		4E814ECA1F63E7FB0025AF0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E814EC81F63E7FB0025AF0A /* LaunchScreen.storyboard */; };
 		4E814ED51F63E7FB0025AF0A /* MoviesProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814ED41F63E7FB0025AF0A /* MoviesProjectTests.m */; };
 		4E814EE01F63E7FB0025AF0A /* MoviesProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EDF1F63E7FB0025AF0A /* MoviesProjectUITests.m */; };
 		4E814EEF1F63E80F0025AF0A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E814EEE1F63E80F0025AF0A /* libsqlite3.tbd */; };
+		D7A456041F64097C005BCC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7A456031F64097C005BCC32 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,6 @@
 		4E814EBE1F63E7FB0025AF0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4E814EC01F63E7FB0025AF0A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4E814EC11F63E7FB0025AF0A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4E814EC41F63E7FB0025AF0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E814EC61F63E7FB0025AF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E814EC91F63E7FB0025AF0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E814ECB1F63E7FB0025AF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		4E814EE11F63E7FB0025AF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E814EEE1F63E80F0025AF0A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D0A125ABC97C4B039DA1B3DE /* Pods-MoviesProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesProject/Pods-MoviesProject.release.xcconfig"; sourceTree = "<group>"; };
+		D7A456031F64097C005BCC32 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FDBA2E1587C2A42DCEF361DA /* libPods-MoviesProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MoviesProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,7 +124,7 @@
 				4E814EBE1F63E7FB0025AF0A /* AppDelegate.m */,
 				4E814EC01F63E7FB0025AF0A /* ViewController.h */,
 				4E814EC11F63E7FB0025AF0A /* ViewController.m */,
-				4E814EC31F63E7FB0025AF0A /* Main.storyboard */,
+				D7A456031F64097C005BCC32 /* Main.storyboard */,
 				4E814EC61F63E7FB0025AF0A /* Assets.xcassets */,
 				4E814EC81F63E7FB0025AF0A /* LaunchScreen.storyboard */,
 				4E814ECB1F63E7FB0025AF0A /* Info.plist */,
@@ -277,9 +277,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7A456041F64097C005BCC32 /* Main.storyboard in Resources */,
 				4E814ECA1F63E7FB0025AF0A /* LaunchScreen.storyboard in Resources */,
 				4E814EC71F63E7FB0025AF0A /* Assets.xcassets in Resources */,
-				4E814EC51F63E7FB0025AF0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,14 +393,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4E814EC31F63E7FB0025AF0A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E814EC41F63E7FB0025AF0A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4E814EC81F63E7FB0025AF0A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -593,6 +585,7 @@
 				4E814EE61F63E7FB0025AF0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E814EE71F63E7FB0025AF0A /* Build configuration list for PBXNativeTarget "MoviesProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -601,6 +594,7 @@
 				4E814EE91F63E7FB0025AF0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E814EEA1F63E7FB0025AF0A /* Build configuration list for PBXNativeTarget "MoviesProjectUITests" */ = {
 			isa = XCConfigurationList;
@@ -609,6 +603,7 @@
 				4E814EEC1F63E7FB0025AF0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
