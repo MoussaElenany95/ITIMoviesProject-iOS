@@ -19,6 +19,7 @@
 		4E814EE01F63E7FB0025AF0A /* MoviesProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EDF1F63E7FB0025AF0A /* MoviesProjectUITests.m */; };
 		4E814EEF1F63E80F0025AF0A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E814EEE1F63E80F0025AF0A /* libsqlite3.tbd */; };
 		D71010F21F648C1C0063053F /* MainBackground.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D71010F11F648C1C0063053F /* MainBackground.jpeg */; };
+		D71010F41F6492CF0063053F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D71010F31F6492CF0063053F /* Icon.png */; };
 		D7A456041F64097C005BCC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7A456031F64097C005BCC32 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		C3B84CB696BDB2DB1447B577 /* Pods-MoviesProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesProjectUITests/Pods-MoviesProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D0A125ABC97C4B039DA1B3DE /* Pods-MoviesProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesProject/Pods-MoviesProject.release.xcconfig"; sourceTree = "<group>"; };
 		D71010F11F648C1C0063053F /* MainBackground.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MainBackground.jpeg; sourceTree = "<group>"; };
+		D71010F31F6492CF0063053F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D7A456031F64097C005BCC32 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FDBA2E1587C2A42DCEF361DA /* libPods-MoviesProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MoviesProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 		4E814EAE1F63E7FB0025AF0A = {
 			isa = PBXGroup;
 			children = (
+				D71010F31F6492CF0063053F /* Icon.png */,
 				D71010F11F648C1C0063053F /* MainBackground.jpeg */,
 				4E814EB91F63E7FB0025AF0A /* MoviesProject */,
 				4E814ED31F63E7FB0025AF0A /* MoviesProjectTests */,
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7A456041F64097C005BCC32 /* Main.storyboard in Resources */,
+				D71010F41F6492CF0063053F /* Icon.png in Resources */,
 				4E814ECA1F63E7FB0025AF0A /* LaunchScreen.storyboard in Resources */,
 				4E814EC71F63E7FB0025AF0A /* Assets.xcassets in Resources */,
 				D71010F21F648C1C0063053F /* MainBackground.jpeg in Resources */,
