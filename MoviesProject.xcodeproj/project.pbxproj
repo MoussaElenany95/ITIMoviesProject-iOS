@@ -175,8 +175,6 @@
 				4E814EC81F63E7FB0025AF0A /* LaunchScreen.storyboard */,
 				4E814ECB1F63E7FB0025AF0A /* Info.plist */,
 				4E814EBA1F63E7FB0025AF0A /* Supporting Files */,
-				D71010F51F64A37F0063053F /* SignUpViewController.h */,
-				D71010F61F64A37F0063053F /* SignUpViewController.m */,
 			);
 			path = MoviesProject;
 			sourceTree = "<group>";
@@ -184,8 +182,10 @@
 		4E814EBA1F63E7FB0025AF0A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4E814EBB1F63E7FB0025AF0A /* main.m */,
+				D71010F51F64A37F0063053F /* SignUpViewController.h */,
+				D71010F61F64A37F0063053F /* SignUpViewController.m */,
 				2AEB3AEE1F64DD4000DE09D6 /* TableViewController */,
+				4E814EBB1F63E7FB0025AF0A /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
