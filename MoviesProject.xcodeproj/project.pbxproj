@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		009447F8496295A349F213DA /* libPods-MoviesProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCF807691C04F7DCB4AB119 /* libPods-MoviesProjectTests.a */; };
+		2A1C06D61F65C0B000BB87A3 /* Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C06D51F65C0B000BB87A3 /* Launch.jpg */; };
+		2A1C06D81F65C43600BB87A3 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C06D71F65C43600BB87A3 /* background.jpg */; };
 		2AEB3AEB1F64DBA100DE09D6 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEB3AEA1F64DBA100DE09D6 /* TableViewController.m */; };
 		2AEB3AF31F64DE4600DE09D6 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEB3AF21F64DE4600DE09D6 /* Movie.m */; };
 		305A582481595DEFD93F9B35 /* libPods-MoviesProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33640313FCC2DA59D493A713 /* libPods-MoviesProjectUITests.a */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A1C06D51F65C0B000BB87A3 /* Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Launch.jpg; sourceTree = "<group>"; };
+		2A1C06D71F65C43600BB87A3 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		2AEB3AE91F64DBA100DE09D6 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		2AEB3AEA1F64DBA100DE09D6 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		2AEB3AF11F64DE4600DE09D6 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 		4E814EAE1F63E7FB0025AF0A = {
 			isa = PBXGroup;
 			children = (
+				2A1C06D71F65C43600BB87A3 /* background.jpg */,
+				2A1C06D51F65C0B000BB87A3 /* Launch.jpg */,
 				D71010F31F6492CF0063053F /* Icon.png */,
 				D71010F11F648C1C0063053F /* MainBackground.jpeg */,
 				4E814EB91F63E7FB0025AF0A /* MoviesProject */,
@@ -331,8 +337,10 @@
 				D7A456041F64097C005BCC32 /* Main.storyboard in Resources */,
 				D71010F41F6492CF0063053F /* Icon.png in Resources */,
 				4E814ECA1F63E7FB0025AF0A /* LaunchScreen.storyboard in Resources */,
+				2A1C06D61F65C0B000BB87A3 /* Launch.jpg in Resources */,
 				4E814EC71F63E7FB0025AF0A /* Assets.xcassets in Resources */,
 				D71010F21F648C1C0063053F /* MainBackground.jpeg in Resources */,
+				2A1C06D81F65C43600BB87A3 /* background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

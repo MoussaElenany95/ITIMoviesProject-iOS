@@ -65,6 +65,8 @@
     
     // Configure the cell...
     Movie *movie=[self.Movies objectAtIndex:indexPath.row];
+    NSString *url=movie.image;
+   // [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRefreshCached];
     cell.detailTextLabel.text=movie.releaseYear;
     cell.textLabel.text=movie.title;
     
