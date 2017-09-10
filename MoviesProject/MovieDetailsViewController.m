@@ -13,15 +13,21 @@
 @end
 
 @implementation MovieDetailsViewController
+-(void)viewWillAppear:(BOOL)animated{
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [_titleLabel setText:[_movie title]];
     [_releaseYearLabel setText:[_movie releaseYear]];
     [_ratingLabel setText:[_movie.rating stringValue]];
     [_imageView sd_setImageWithURL:[NSURL URLWithString:[_movie image]]
                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+
+
+
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
 }
 
 
