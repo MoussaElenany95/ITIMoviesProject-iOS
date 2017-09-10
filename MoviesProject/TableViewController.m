@@ -11,7 +11,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.Movies=[[NSMutableArray alloc]init];
-    
+    movDb =[MoviesDatabase new];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
@@ -20,7 +20,22 @@
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
-            NSLog(@"Error: %@", error);
+            UIAlertController *errAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                
+                printf("Offline mode");
+                
+                if([movDb moviesTableEmpty]){
+                    printf("NO Data found in Ofline mode");
+                }
+                else{
+                    self.Movies = [movDb showAllMovies];
+                }
+                
+            }];
+            [errAlert addAction:okAction];
+            [self presentViewController:errAlert animated:YES completion:nil];
+
         } else {
             for (int i=0; i<[responseObject count]; i++) {
                 Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];

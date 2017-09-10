@@ -10,8 +10,11 @@
 #import <JSONModel.h>
 #import <AFNetworking.h>
 #import "Movie.h"
+#import "MoviesDatabase.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface TableViewController : UITableViewController
+@interface TableViewController : UITableViewController{
+    MoviesDatabase *movDb;
+}
 
 @property NSMutableArray *Movies;
 @property NSMutableArray *images;
