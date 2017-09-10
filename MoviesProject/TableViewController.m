@@ -10,6 +10,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    movieDetailsViewObject = [storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
+
+    
+    
+    
     self.Movies=[[NSMutableArray alloc]init];
     movDb =[MoviesDatabase new];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -87,7 +95,16 @@
     
     return cell;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    Movie * obj = [_Movies objectAtIndex:indexPath.row];
+    [movieDetailsViewObject setMovie: obj];
+    
+    [self showViewController:movieDetailsViewObject sender:self];
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
