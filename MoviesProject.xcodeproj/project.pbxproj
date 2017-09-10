@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		009447F8496295A349F213DA /* libPods-MoviesProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCF807691C04F7DCB4AB119 /* libPods-MoviesProjectTests.a */; };
+		2AEB3AEB1F64DBA100DE09D6 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEB3AEA1F64DBA100DE09D6 /* TableViewController.m */; };
+		2AEB3AF31F64DE4600DE09D6 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEB3AF21F64DE4600DE09D6 /* Movie.m */; };
 		305A582481595DEFD93F9B35 /* libPods-MoviesProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33640313FCC2DA59D493A713 /* libPods-MoviesProjectUITests.a */; };
 		3658A6770822AE4BD327BDB1 /* libPods-MoviesProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDBA2E1587C2A42DCEF361DA /* libPods-MoviesProject.a */; };
 		4E814EBC1F63E7FB0025AF0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E814EBB1F63E7FB0025AF0A /* main.m */; };
@@ -42,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2AEB3AE91F64DBA100DE09D6 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		2AEB3AEA1F64DBA100DE09D6 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		2AEB3AF11F64DE4600DE09D6 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		2AEB3AF21F64DE4600DE09D6 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		30F8D3AC9FE403C740823F7C /* Pods-MoviesProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesProject/Pods-MoviesProject.debug.xcconfig"; sourceTree = "<group>"; };
 		33640313FCC2DA59D493A713 /* libPods-MoviesProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MoviesProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E814EB71F63E7FB0025AF0A /* MoviesProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +122,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2AEB3AEE1F64DD4000DE09D6 /* TableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AEB3AE91F64DBA100DE09D6 /* TableViewController.h */,
+				2AEB3AEA1F64DBA100DE09D6 /* TableViewController.m */,
+				2AEB3AF11F64DE4600DE09D6 /* Movie.h */,
+				2AEB3AF21F64DE4600DE09D6 /* Movie.m */,
+			);
+			name = TableViewController;
+			sourceTree = "<group>";
+		};
 		4E814EAE1F63E7FB0025AF0A = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				4E814EBB1F63E7FB0025AF0A /* main.m */,
+				2AEB3AEE1F64DD4000DE09D6 /* TableViewController */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -486,10 +504,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AEB3AF31F64DE4600DE09D6 /* Movie.m in Sources */,
 				4E814EC21F63E7FB0025AF0A /* ViewController.m in Sources */,
 				4E814EBF1F63E7FB0025AF0A /* AppDelegate.m in Sources */,
 				D71010F71F64A37F0063053F /* SignUpViewController.m in Sources */,
 				4E814EBC1F63E7FB0025AF0A /* main.m in Sources */,
+				2AEB3AEB1F64DBA100DE09D6 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
