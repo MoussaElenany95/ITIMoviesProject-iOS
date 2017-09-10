@@ -168,9 +168,6 @@
 				4E814EC61F63E7FB0025AF0A /* Assets.xcassets */,
 				4E814EC81F63E7FB0025AF0A /* LaunchScreen.storyboard */,
 				4E814ECB1F63E7FB0025AF0A /* Info.plist */,
-				D71010F51F64A37F0063053F /* SignUpViewController.h */,
-				D71010F61F64A37F0063053F /* SignUpViewController.m */,
-				2AEB3AEE1F64DD4000DE09D6 /* TableViewController */,
 				4E814EBA1F63E7FB0025AF0A /* Supporting Files */,
 			);
 			path = MoviesProject;
@@ -179,6 +176,9 @@
 		4E814EBA1F63E7FB0025AF0A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D71010F51F64A37F0063053F /* SignUpViewController.h */,
+				D71010F61F64A37F0063053F /* SignUpViewController.m */,
+				2AEB3AEE1F64DD4000DE09D6 /* TableViewController */,
 				4E814EBB1F63E7FB0025AF0A /* main.m */,
 			);
 			name = "Supporting Files";
