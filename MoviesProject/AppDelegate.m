@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <AFNetworking.h>
 @interface AppDelegate ()
 
 @end
@@ -16,6 +16,35 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
+    [appUserDefault setBool:NO forKey:@"isOffline"];
+    
+    AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager sharedManager];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status ){
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                
+            case AFNetworkReachabilityStatusUnknown:
+                [appUserDefault setBool:NO forKey:@"isOffline"];
+                break;
+                
+            case AFNetworkReachabilityStatusNotReachable:{
+                [appUserDefault setBool:YES forKey:@"isOffline"];
+                NSLog(@"Connection lost");
+                
+                break;
+            }
+            default:
+                NSLog(@"Wfffff");
+                break;
+                
+        }}];
+    
+
     // Override point for customization after application launch.
     return YES;
 }

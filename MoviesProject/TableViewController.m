@@ -16,48 +16,6 @@
     movieDetailsViewObject = [storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
 
     
-    
-    
-    self.Movies=[[NSMutableArray alloc]init];
-    movDb =[MoviesDatabase new];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            UIAlertController *errAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                
-                printf("Offline mode");
-                
-                if([movDb moviesTableEmpty]){
-                    printf("NO Data found in Ofline mode");
-                }
-                else{
-                    self.Movies = [movDb showAllMovies];
-                }
-                
-            }];
-            [errAlert addAction:okAction];
-            [self presentViewController:errAlert animated:YES completion:nil];
-
-        } else {
-            for (int i=0; i<[responseObject count]; i++) {
-                Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
-                [self.Movies addObject:movie];
-            }
-        }
-    }];
-    [dataTask resume];
-    
-    double delay=0.1;
-    [NSThread sleepForTimeInterval:delay];
-
-
-    
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear =YES;
     
@@ -105,7 +63,55 @@
     [self showViewController:movieDetailsViewObject sender:self];
     
 }
+-(void)viewDidAppear:(BOOL)animated{
+    UIAlertController *offlineAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        self.Movies = [movDb showAllMovies];
+        [self.tableView reloadData];
+        
+        
+        
+    }];
+    [offlineAlert addAction:okAction];
+    
+    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
+    
+    
+    self.Movies=[[NSMutableArray alloc]init];
+    movDb =[MoviesDatabase new];
+    if ([appUserDefault boolForKey:@"isOffline"] == NO) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        //[movDb dropTable];
+        NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                [self presentViewController:offlineAlert animated:YES completion:nil];
+                
+            } else {
+                for (int i=0; i<[responseObject count]; i++) {
+                    Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
+                    [self.Movies addObject:movie];
+                }
+                [movDb insertMovieAtOnece:self.Movies];
+                
+            }
+        }];
+        [dataTask resume];
+        
+        double delay=0.1;
+        [NSThread sleepForTimeInterval:delay];
+        
+        
+        
+    }else{
+        [self presentViewController:offlineAlert animated:YES completion:nil];
+    }
 
+
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
