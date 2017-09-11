@@ -81,7 +81,7 @@
     self.Movies=[[NSMutableArray alloc]init];
     movDb =[MoviesDatabase new];
     if ([appUserDefault boolForKey:@"isOffline"] == NO) {
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         //[movDb dropTable];
         NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
@@ -95,6 +95,7 @@
                     Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
                     [self.Movies addObject:movie];
                 }
+                [self.tableView reloadData];
                 [movDb insertMovieAtOnece:self.Movies];
                 
             }
