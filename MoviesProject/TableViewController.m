@@ -14,6 +14,40 @@
     storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     movieDetailsViewObject = [storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
+    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
+    
+    
+    self.Movies=[[NSMutableArray alloc]init];
+    movDb =[MoviesDatabase new];
+    if ([appUserDefault boolForKey:@"isOffline"] == NO) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                printf("Downloading error");
+            } else {
+                for (int i=0; i<[responseObject count]; i++) {
+                    Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
+                    [self.Movies addObject:movie];
+                }
+                [self.tableView reloadData];
+                [movDb insertMovieAtOnece:self.Movies];
+            }
+        }];
+        [dataTask resume];
+        
+        double delay=0.1;
+        [NSThread sleepForTimeInterval:delay];
+        
+        
+        
+    }else{
+        self.Movies = [movDb showAllMovies];
+    }
+    
+    
 
     
     // Uncomment the following line to preserve selection between presentations.
@@ -60,55 +94,8 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-    UIAlertController *offlineAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        self.Movies = [movDb showAllMovies];
-        [self.tableView reloadData];
-        
-        
-        
-    }];
-    [offlineAlert addAction:okAction];
-    
-    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
-    
-    
-    self.Movies=[[NSMutableArray alloc]init];
-    movDb =[MoviesDatabase new];
-    if ([appUserDefault boolForKey:@"isOffline"] == NO) {
-                NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        //[movDb dropTable];
-        NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            if (error) {
-                [self presentViewController:offlineAlert animated:YES completion:nil];
-                
-            } else {
-                for (int i=0; i<[responseObject count]; i++) {
-                    Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
-                    [self.Movies addObject:movie];
-                }
-                [self.tableView reloadData];
-                [movDb insertMovieAtOnece:self.Movies];
-                
-            }
-        }];
-        [dataTask resume];
-        
-        double delay=0.1;
-        [NSThread sleepForTimeInterval:delay];
-        
-        
-        
-    }else{
-        [self presentViewController:offlineAlert animated:YES completion:nil];
+
     }
-
-
-}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

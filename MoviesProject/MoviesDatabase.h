@@ -11,8 +11,12 @@
 @interface MoviesDatabase : NSObject
     @property (strong , nonatomic) NSString *databasePath;
     @property (nonatomic) sqlite3 *contactDB;
+
     -(BOOL)RegisterNewUser:(NSString*)name : (NSString *)phone;
-    -(BOOL)insertMovieAtOnece:(Movie *) movie;
+
+    -(void)insertMovieAtOnece:(NSMutableArray *) movies;
+
     -(NSMutableArray *) showAllMovies;
+
     -(BOOL) moviesTableEmpty;
 @end

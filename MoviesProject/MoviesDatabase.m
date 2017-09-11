@@ -146,7 +146,7 @@
          return movies;
 }
 //Stor data only at one time
-- (void)insertMovieAtOnece:(NSMutableArray *)movies{
+-(void)insertMovieAtOnece:(NSMutableArray *)movies{
     if([self moviesTableEmpty] ){
         sqlite3_stmt    *statement;
         const char *dbpath = [_databasePath UTF8String];
