@@ -23,5 +23,6 @@
 @property NSMutableArray *Movies;
 @property NSMutableArray *images;
 
+- (IBAction)logOutPressed:(id)sender;
 
 @end

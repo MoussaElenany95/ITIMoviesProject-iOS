@@ -12,7 +12,7 @@
         <!--Login-->
         <scene sceneID="sIO-vf-Tbz">
             <objects>
-                <viewController title="Login" id="ijV-mL-mtt" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" title="Login" id="ijV-mL-mtt" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oCK-pO-U46"/>
                         <viewControllerLayoutGuide type="bottom" id="U5I-9W-bj5"/>
@@ -156,11 +156,17 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Clicking Create account means that you agree to our terms &amp; policies." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qsR-Ev-gpB">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsR-Ev-gpB">
                                 <rect key="frame" x="39" y="305" width="240" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.83791835362305123" green="0.87470256979695438" blue="0.57955032137516937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Clicking Create account means that you agree to our terms &amp; policies.">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -220,16 +226,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies" id="aZQ-0s-KvE">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="KM0-Wp-YnP">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="IfZ-pY-2db">
                             <connections>
-                                <segue destination="ijV-mL-mtt" kind="presentation" id="i5H-Ca-hla"/>
+                                <action selector="logOutPressed:" destination="I1n-gQ-FJe" id="9Zw-6r-wKm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufk-I7-2qI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4038.75" y="410.91549295774649"/>
+            <point key="canvasLocation" x="3956" y="411"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="HAD-U8-Jc5">
@@ -319,7 +325,4 @@
             <point key="canvasLocation" x="858.75" y="120.4225352112676"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="i5H-Ca-hla"/>
-    </inferredMetricsTieBreakers>
 </document>

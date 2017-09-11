@@ -2,7 +2,9 @@
 
 #import "TableViewController.h"
 
-@interface TableViewController ()
+@interface TableViewController (){
+    NSUserDefaults *appUserDefault;
+}
 
 @end
 
@@ -10,11 +12,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    movieDetailsViewObject = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
     
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    movieDetailsViewObject = [storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
-    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
+    appUserDefault = [NSUserDefaults standardUserDefaults];
     
     
     self.Movies=[[NSMutableArray alloc]init];
@@ -139,5 +139,22 @@
     // Pass the selected object to the new view controller.
 }
 
-
+- (IBAction)logOutPressed:(id)sender {
+    UIAlertController *logOutAlert =[UIAlertController alertControllerWithTitle:@"Log Out" message:@"Are you sure ?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"Log Out" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [appUserDefault setBool:NO forKey:@"isRegistered"];
+        //Go to Sign up view
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login"] animated:YES];
+        
+        
+    }];
+    UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        //Cancel
+        
+    }];
+    [logOutAlert addAction:signUpAction];
+    [logOutAlert addAction:cancelAction];
+    
+    [self presentViewController:logOutAlert animated:YES completion:nil];
+}
 @end

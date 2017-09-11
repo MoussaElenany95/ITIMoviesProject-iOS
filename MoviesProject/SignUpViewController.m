@@ -53,27 +53,93 @@
 - (IBAction)CreateButton:(id)sender {
     name=[_nameSign text];
     phone=[_phoneSign text];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
-    NSURL *URL = [NSURL URLWithString:myurl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSNumberFormatter *formater =[NSNumberFormatter new];
+    [formater setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
-            if([json.result isEqualToString:@"User registered Successfuly"]){
-                 [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
-            }
-            else{
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            }
-        }
-    }];
-    [dataTask resume];
+    NSNumber *phoneNumber = [formater numberFromString:phone];
+    NSNumber *nameNumber  = [formater numberFromString:name];
+    
+    UIAlertController *dataAlert;
+    UIAlertAction *okAction;
+    NSUserDefaults *appUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //check if data successfuly enterd or not
+    if ([name isEqualToString:@""] || [phone isEqualToString:@""]) {
+        dataAlert = [UIAlertController alertControllerWithTitle:@"Dismissing data" message:@"Data must be filled" preferredStyle:UIAlertControllerStyleAlert];
+        okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            ////////////////////////////////////
+            
+        }];
+        [dataAlert addAction:okAction];
+        
+        [self presentViewController:dataAlert animated:YES completion:nil];
+    }
+    
+    else if(!phoneNumber || nameNumber) {
+        
+        //Invalied Data Alert
+        dataAlert = [UIAlertController alertControllerWithTitle:@"Invalid data" message:@"Please Enter vailed data" preferredStyle:UIAlertControllerStyleAlert];
+        okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            ///Ok I understand
+            
+        }];
+        [dataAlert addAction:okAction];
+        
+        [self presentViewController:dataAlert animated:YES completion:nil];
     }
 
+    if (![appUserDefaults boolForKey:@"isOffline"]) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
+        NSURL *URL = [NSURL URLWithString:myurl];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+            } else {
+                json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
+                if([json.result isEqualToString:@"User registered Successfuly"]){
+                    [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                }
+                else if([json.result isEqualToString:@"This Phone is already Registered."]){
+                    
+                    UIAlertController *signUpAlert = [UIAlertController alertControllerWithTitle:@"SignUp failed" message:@"User Is already registered" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *signInAction =[UIAlertAction actionWithTitle: @"SignIn" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                        
+                        [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                        
+                    }];
+                    UIAlertAction *cancelAction =[UIAlertAction actionWithTitle: @"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                        //Cancel
+                        
+                    }];
+                    [signUpAlert addAction:signInAction];
+                    [signUpAlert addAction:cancelAction];
+                    [self presentViewController:signUpAlert animated:YES completion:nil];
+                    
+                }
+            }
+        }];
+        [dataTask resume];
+        
+    }else{
+        
+        //Offline mode
+        dataAlert = [UIAlertController alertControllerWithTitle:@"No Internet Access" message:@"Please check your Network" preferredStyle:UIAlertControllerStyleAlert];
+        okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            ///Ok I understand
+            
+        }];
+        [dataAlert addAction:okAction];
+        
+        [self presentViewController:dataAlert animated:YES completion:nil];
+    
+    }
+    
+    }
 @end

@@ -18,7 +18,7 @@
     NSString *phone;
     NSString *myurl;
     myJSON *json;
-
+    NSUserDefaults *appUserDefault;
 
 }
 
@@ -29,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.jpg"]]];
+    appUserDefault =[NSUserDefaults standardUserDefaults];
+    if ([appUserDefault boolForKey:@"isRegistered"]) {
+        [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+    }
+
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -52,9 +57,6 @@
     UIAlertController *dataAlert;
     UIAlertAction *okAction;
     
-    //user sefaults to check offline mode
-    NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
-    
     //check if data successfuly enterd or not
     if ([name isEqualToString:@""] || [phone isEqualToString:@""]) {
                 dataAlert = [UIAlertController alertControllerWithTitle:@"Dismissing data" message:@"Data must be filled" preferredStyle:UIAlertControllerStyleAlert];
@@ -74,7 +76,7 @@
         dataAlert = [UIAlertController alertControllerWithTitle:@"Invalid data" message:@"Please Enter vailed data" preferredStyle:UIAlertControllerStyleAlert];
         okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             
-            
+            ///Ok I understand
             
         }];
         [dataAlert addAction:okAction];
@@ -85,7 +87,7 @@
         //Offline alert if conection lost
         dataAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
         okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
+            [appUserDefault setBool:YES forKey:@"isRegistered"];
                 [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
         }];
         [dataAlert addAction:okAction];
@@ -105,7 +107,7 @@
             } else {
                 json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
                 if([json.result isEqualToString:@"This Phone is already Registered."]){
-                    
+                    [appUserDefault setBool:YES forKey:@"isRegistered"];
                     [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
                     
                 }
