@@ -7,8 +7,20 @@
 //
 
 #import "SignUpViewController.h"
+#import "ViewController.h"
+#import <AFNetworking.h>
+#import "myJSON.h"
+#import <JSONModel.h>
+#import "TableViewController.h"
 
-@interface SignUpViewController ()
+@interface SignUpViewController (){
+    NSString *name;
+    NSString *phone;
+    NSString *myurl;
+    myJSON *json;
+
+
+}
 
 @end
 
@@ -37,5 +49,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)CreateButton:(id)sender {
+    name=[_nameSign text];
+    phone=[_phoneSign text];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
+    NSURL *URL = [NSURL URLWithString:myurl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
+            if([json.result isEqualToString:@"User registered Successfuly"]){
+                 [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+            }
+            else{
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }
+        }
+    }];
+    [dataTask resume];
+    }
 
 @end

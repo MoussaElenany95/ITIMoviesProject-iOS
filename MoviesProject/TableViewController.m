@@ -46,8 +46,8 @@
     
     // Configure the cell...
     Movie *movie=[self.Movies objectAtIndex:indexPath.row];
-//    NSString *url=movie.image;
-//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRefreshCached];
+    NSString *url=movie.image;
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRefreshCached];
     cell.detailTextLabel.text=movie.releaseYear;
     cell.textLabel.text=movie.title;
     
@@ -55,12 +55,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    Movie * obj = [_Movies objectAtIndex:indexPath.row];
-    [movieDetailsViewObject setMovie: obj];
-    
-    [self showViewController:movieDetailsViewObject sender:self];
+   [movieDetailsViewObject setMovie: [self.Movies objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:movieDetailsViewObject animated:YES];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -147,14 +143,14 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+ //In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end

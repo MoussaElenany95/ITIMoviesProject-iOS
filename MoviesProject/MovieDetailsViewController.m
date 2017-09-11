@@ -21,13 +21,11 @@
     [_imageView sd_setImageWithURL:[NSURL URLWithString:[_movie image]]
                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
 
-
-
-
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationItem setTitle:@"Details"];
 }
 
 

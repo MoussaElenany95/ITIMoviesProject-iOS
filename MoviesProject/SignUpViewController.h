@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : UIViewController <UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nameSign;
+@property (weak, nonatomic) IBOutlet UITextField *phoneSign;
+- (IBAction)CreateButton:(id)sender;
+
+
 
 @end
