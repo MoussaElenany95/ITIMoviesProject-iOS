@@ -17,10 +17,24 @@
 
     [_titleLabel setText:[_movie title]];
     [_releaseYearLabel setText:[_movie releaseYear]];
-    [_ratingLabel setText:[_movie.rating stringValue]];
     [_imageView sd_setImageWithURL:[NSURL URLWithString:[_movie image]]
                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    
+    
+    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] initWithFrame:CGRectMake(60, 424, 200, 50)];
+    starRatingView.allowsHalfStars = YES;
 
+    starRatingView.maximumValue = 10;
+    starRatingView.minimumValue = 0;
+    starRatingView.value = _movie.rating.floatValue;
+
+    starRatingView.tintColor = [UIColor yellowColor];
+    //[starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:starRatingView];
+    
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
