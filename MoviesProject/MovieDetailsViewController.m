@@ -29,7 +29,6 @@
     
     
     
-    
     HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] initWithFrame:CGRectMake(60, 424, 200, 50)];
     starRatingView.allowsHalfStars = YES;
 
@@ -37,7 +36,7 @@
     starRatingView.minimumValue = 0;
     starRatingView.value = _movie.rating.floatValue;
 
-    starRatingView.tintColor = [UIColor yellowColor];
+    starRatingView.tintColor = [UIColor redColor];
     //[starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:starRatingView];
     
