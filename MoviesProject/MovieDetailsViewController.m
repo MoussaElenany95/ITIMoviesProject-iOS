@@ -29,18 +29,20 @@
     
     
     
+    
     HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] initWithFrame:CGRectMake(60, 424, 200, 50)];
     starRatingView.allowsHalfStars = YES;
-
+    [starRatingView setBackgroundColor:[[UIColor alloc] initWithRed:0.92193537950000004 green:0.69741988180000003 blue:0.18115940689999999 alpha:1]];
+    starRatingView.allowsHalfStars = YES;
     starRatingView.maximumValue = 10;
     starRatingView.minimumValue = 0;
     starRatingView.value = _movie.rating.floatValue;
 
-    starRatingView.tintColor = [UIColor redColor];
+    starRatingView.tintColor = [UIColor yellowColor];
     //[starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:starRatingView];
     
-    
+
     
 }
 - (void)viewDidLoad {

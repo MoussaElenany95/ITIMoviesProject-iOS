@@ -16,7 +16,6 @@
     
     appUserDefault = [NSUserDefaults standardUserDefaults];
     
-    
     self.Movies=[[NSMutableArray alloc]init];
     movDb =[MoviesDatabase new];
     if ([appUserDefault boolForKey:@"isOffline"] == NO) {
@@ -38,12 +37,13 @@
         }];
         [dataTask resume];
         
-        double delay=0.1;
-        [NSThread sleepForTimeInterval:delay];
+        //double delay=0.1;
+        //[NSThread sleepForTimeInterval:delay];
         
         
         
     }else{
+        printf("Is offline");
         self.Movies = [movDb showAllMovies];
     }
     
@@ -94,8 +94,11 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-
+    //if internet will be aaccessed
+    if (![appUserDefault boolForKey:@"isOffline"]) {
+        [self viewDidLoad];
     }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

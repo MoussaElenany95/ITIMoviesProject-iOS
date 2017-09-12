@@ -29,9 +29,11 @@
             case AFNetworkReachabilityStatusReachableViaWWAN:
                 
             case AFNetworkReachabilityStatusUnknown:
+            {
+                printf("Internet Is reachable");
                 [appUserDefault setBool:NO forKey:@"isOffline"];
                 break;
-                
+            }
             case AFNetworkReachabilityStatusNotReachable:{
                 [appUserDefault setBool:YES forKey:@"isOffline"];
                 NSLog(@"Connection lost");
