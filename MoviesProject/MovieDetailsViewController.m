@@ -20,6 +20,14 @@
     [_imageView sd_setImageWithURL:[NSURL URLWithString:[_movie image]]
                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
+
+    
+    NSString *createdString = [[_movie genre] componentsJoinedByString:@" "];
+    [_genreLabel setText:createdString];
+    
+    
+    
+    
     
     
     HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] initWithFrame:CGRectMake(60, 424, 200, 50)];

@@ -267,10 +267,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGR-gF-Wgf">
+                                <rect key="frame" x="16" y="527" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92193537950000004" green="0.69741988180000003" blue="0.18115940689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="genreLabel" destination="qGR-gF-Wgf" id="NtE-kb-Fpe"/>
                         <outlet property="imageView" destination="KtM-ka-K2w" id="m15-IC-YRu"/>
                         <outlet property="releaseYearLabel" destination="OdW-8r-6on" id="YeA-DP-dHn"/>
                         <outlet property="titleLabel" destination="O0u-aP-4Ix" id="rfz-jQ-bme"/>

@@ -144,8 +144,7 @@
     UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"Log Out" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         [appUserDefault setBool:NO forKey:@"isRegistered"];
         //Go to Sign up view
-        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login"] animated:YES];
-        
+        [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login"] sender:self];
         
     }];
     UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
