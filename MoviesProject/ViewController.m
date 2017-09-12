@@ -33,7 +33,9 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.jpg"]]];
     movDb = [MoviesDatabase new];
+    
     appUserDefault =[NSUserDefaults standardUserDefaults];
+    
     if ([appUserDefault boolForKey:@"isRegistered"]) {
         [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
     }

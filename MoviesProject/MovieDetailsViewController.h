@@ -25,6 +25,5 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *genreLabel;
-
 @end
 
