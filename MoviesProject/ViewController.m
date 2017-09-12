@@ -105,9 +105,10 @@
         [dataAlert addAction:cancelAction];
         ///////////////////////////////////////
     
-        //check if offline or not
-        if (![appUserDefault boolForKey:@"isOffline"]) {
-                if([movDb searchForUserByPhone:phone]){
+        
+        if([movDb searchForUserByPhone:phone]){
+            //check if offline or not
+            if (![appUserDefault boolForKey:@"isOffline"]) {
                     
                         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
                         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -134,28 +135,28 @@
                         
                     
                 }else{
-                    
-                        UIAlertController *signUpAlert =[UIAlertController alertControllerWithTitle:@"User not Found" message:@"User not found , Signup now ? " preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"SignUp" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                            //Go to Sign up view
-                            [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"signup"] animated:YES];
-                            
-                            
-                        }];
-                        UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                            //Cancel
-                            
-                        }];
-                        [signUpAlert addAction:signUpAction];
-                        [signUpAlert addAction:cancelAction];
-                        
-                        [self presentViewController:signUpAlert animated:YES completion:nil];
-                        
+                    [self presentViewController:dataAlert animated:YES completion:nil];
                     
                 }
             
         }else{
-            [self presentViewController:dataAlert animated:YES completion:nil];
+            UIAlertController *signUpAlert =[UIAlertController alertControllerWithTitle:@"User not Found" message:@"User not found , Signup now ? " preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"SignUp" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                //Go to Sign up view
+                [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"signup"] animated:YES];
+                
+                
+            }];
+            UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                //Cancel
+                
+            }];
+            [signUpAlert addAction:signUpAction];
+            [signUpAlert addAction:cancelAction];
+            
+            [self presentViewController:signUpAlert animated:YES completion:nil];
+            
+            
         }
     
     }
