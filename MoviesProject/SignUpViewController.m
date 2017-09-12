@@ -103,7 +103,10 @@
             
             NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                 if (error) {
-                    NSLog(@"Error: %@", error);
+                    UIAlertController *connAlert = [UIAlertController alertControllerWithTitle:@"Connection Lost" message:@"Check your Internet" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+                    [connAlert addAction:okAction];
+                    [self presentViewController:connAlert animated:YES completion:nil];
                 } else {
                     json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
                     if([json.result isEqualToString:@"User registered Successfuly"]){

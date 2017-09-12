@@ -22,7 +22,6 @@
 
     AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager sharedManager];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
     [reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status ){
         switch (status) {
             case AFNetworkReachabilityStatusReachableViaWiFi:
@@ -36,7 +35,6 @@
             case AFNetworkReachabilityStatusNotReachable:{
                 [appUserDefault setBool:YES forKey:@"isOffline"];
                 NSLog(@"Connection lost");
-                
                 break;
             }
                 

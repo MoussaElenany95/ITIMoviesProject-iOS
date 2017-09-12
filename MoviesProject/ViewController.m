@@ -65,7 +65,7 @@
     
     UIAlertController *dataAlert;
     UIAlertAction *okAction;
-    
+    UIAlertAction *cancelAction;
     //check if data successfuly enterd or not
     if ([name isEqualToString:@""] || [phone isEqualToString:@""]) {
                 dataAlert = [UIAlertController alertControllerWithTitle:@"Dismissing data" message:@"Data must be filled" preferredStyle:UIAlertControllerStyleAlert];
@@ -99,7 +99,10 @@
             [appUserDefault setBool:YES forKey:@"isRegistered"];
                 [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
         }];
+        cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+
         [dataAlert addAction:okAction];
+        [dataAlert addAction:cancelAction];
         ///////////////////////////////////////
     
         //check if offline or not
@@ -113,7 +116,7 @@
                         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
                         NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                             if (error) {
-                                NSLog(@"Error: %@", error);
+                                [self presentViewController:dataAlert animated:YES completion:nil];
                             } else {
                                 json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
                                 if([json.result isEqualToString:@"This Phone is already Registered."]){
