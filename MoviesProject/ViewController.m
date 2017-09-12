@@ -10,10 +10,13 @@
 #import <AFNetworking.h>
 #import "myJSON.h"
 #import <JSONModel.h>
+#import "MoviesDatabase.h"
 #import "SignUpViewController.h"
 #import "TableViewController.h"
 
 @interface ViewController (){
+    
+    MoviesDatabase *movDb;
     NSString *name;
     NSString *phone;
     NSString *myurl;
@@ -29,13 +32,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.jpg"]]];
+    movDb = [MoviesDatabase new];
     appUserDefault =[NSUserDefaults standardUserDefaults];
     if ([appUserDefault boolForKey:@"isRegistered"]) {
         [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
     }
-
+    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:NO];
+    
+
+}
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
@@ -95,48 +104,53 @@
     
         //check if offline or not
         if (![appUserDefault boolForKey:@"isOffline"]) {
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-            myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
-            NSURL *URL = [NSURL URLWithString:myurl];
-            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        
-            NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            if (error) {
-                NSLog(@"Error: %@", error);
-            } else {
-                json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
-                if([json.result isEqualToString:@"This Phone is already Registered."]){
-                    [appUserDefault setBool:YES forKey:@"isRegistered"];
-                    [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                if([movDb searchForUserByPhone:phone]){
                     
-                }
-                else
-                {
-                    UIAlertController *signUpAlert =[UIAlertController alertControllerWithTitle:@"User not Found" message:@"User not found , Signup now ? " preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"SignUp" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                        //Go to Sign up view
-                        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"signup"] animated:YES];
+                        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+                        myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
+                        NSURL *URL = [NSURL URLWithString:myurl];
+                        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+                        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            } else {
+                                json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
+                                if([json.result isEqualToString:@"This Phone is already Registered."]){
+                                    //register user in local database if not exist
+                                    
+                                    [appUserDefault setBool:YES forKey:@"isRegistered"];
+                                    
+                                    [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                                    
+                                }
+                                
+                            }
+                        }];
+                        [dataTask resume];
                         
                     
-                    }];
-                    UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                        //Cancel
-                        
-                    }];
-                    [signUpAlert addAction:signUpAction];
-                    [signUpAlert addAction:cancelAction];
+                }else{
                     
-                    [self presentViewController:signUpAlert animated:YES completion:nil];
+                        UIAlertController *signUpAlert =[UIAlertController alertControllerWithTitle:@"User not Found" message:@"User not found , Signup now ? " preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"SignUp" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                            //Go to Sign up view
+                            [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"signup"] animated:YES];
+                            
+                            
+                        }];
+                        UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                            //Cancel
+                            
+                        }];
+                        [signUpAlert addAction:signUpAction];
+                        [signUpAlert addAction:cancelAction];
+                        
+                        [self presentViewController:signUpAlert animated:YES completion:nil];
+                        
                     
                 }
-                
-            }
-            }];
-            [dataTask resume];
-        
-        
-
+            
         }else{
             [self presentViewController:dataAlert animated:YES completion:nil];
         }

@@ -12,11 +12,11 @@
     @property (strong , nonatomic) NSString *databasePath;
     @property (nonatomic) sqlite3 *contactDB;
 
-    -(BOOL)RegisterNewUser:(NSString*)name : (NSString *)phone;
+    -(void)RegisterNewUserIfNotExist:(NSString*)name : (NSString *)phone;
 
     -(void)insertMovieAtOnece:(NSMutableArray *) movies;
 
     -(NSMutableArray *) showAllMovies;
-
+    -(BOOL)searchForUserByPhone:(NSString *)phone;
     -(BOOL) moviesTableEmpty;
 @end

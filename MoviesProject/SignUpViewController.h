@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MoviesDatabase.h"
 @interface SignUpViewController : UIViewController <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameSign;
 @property (weak, nonatomic) IBOutlet UITextField *phoneSign;

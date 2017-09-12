@@ -14,6 +14,7 @@
 #import "TableViewController.h"
 
 @interface SignUpViewController (){
+    MoviesDatabase* movDb;
     NSString *name;
     NSString *phone;
     NSString *myurl;
@@ -29,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.jpg"]]];
-
+    movDb = [MoviesDatabase new];
+    
     // Do any additional setup after loading the view.
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -91,40 +93,42 @@
     }
 
     if (![appUserDefaults boolForKey:@"isOffline"]) {
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
-        NSURL *URL = [NSURL URLWithString:myurl];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        
-        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            if (error) {
-                NSLog(@"Error: %@", error);
-            } else {
-                json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
-                if([json.result isEqualToString:@"User registered Successfuly"]){
-                    [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
-                }
-                else if([json.result isEqualToString:@"This Phone is already Registered."]){
-                    
-                    UIAlertController *signUpAlert = [UIAlertController alertControllerWithTitle:@"SignUp failed" message:@"User Is already registered" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *signInAction =[UIAlertAction actionWithTitle: @"SignIn" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                        
+        if (![movDb searchForUserByPhone:phone]) {
+            
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            myurl =[[NSString alloc] initWithFormat:@"http://jets.iti.gov.eg/FriendsApp/services/user/register?name=%@&phone=%@",name,phone];
+            NSURL *URL = [NSURL URLWithString:myurl];
+            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+            
+            NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                } else {
+                    json=[[myJSON alloc] initWithDictionary:responseObject error:nil];
+                    if([json.result isEqualToString:@"User registered Successfuly"]){
+                        [movDb RegisterNewUserIfNotExist:name :phone];
                         [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                    }
+                    else if([json.result isEqualToString:@"This Phone is already Registered."]){
                         
-                    }];
-                    UIAlertAction *cancelAction =[UIAlertAction actionWithTitle: @"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                        //Cancel
-                        
-                    }];
-                    [signUpAlert addAction:signInAction];
-                    [signUpAlert addAction:cancelAction];
-                    [self presentViewController:signUpAlert animated:YES completion:nil];
-                    
+                        [movDb RegisterNewUserIfNotExist:name :phone];
+                        [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
+                    }
                 }
-            }
-        }];
-        [dataTask resume];
+            }];
+            [dataTask resume];
+            
+        }else{
+            UIAlertController *signUpAlert = [UIAlertController alertControllerWithTitle:@"SignUp failed" message:@"User phone Is already registered" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction =[UIAlertAction actionWithTitle: @"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                //Cancel
+                
+            }];
+            [signUpAlert addAction:cancelAction];
+            [self presentViewController:signUpAlert animated:YES completion:nil];
+            
+        }
         
     }else{
         

@@ -37,7 +37,7 @@
         {
             printf("Can't create tables");
         }else{
-            printf("Nice to create tables \n");
+            //printf("Nice to create tables \n");
         }
         sqlite3_close(_contactDB);
     } else {
@@ -96,7 +96,7 @@
     }else{
         printf("Database Connection lost");
     }
-    printf("%d",rows);
+    //printf("%d",rows);
     if (rows == 0) {
         return YES;
     }else{
@@ -161,7 +161,7 @@
                                    -1, &statement, NULL);
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
-                    printf("Success");
+                    //printf("Success");
                 } else {
                     printf("%s",sqlite3_errmsg(_contactDB));
                 }
@@ -178,9 +178,65 @@
     }
 
 }
+//check if Users table is empty or not
+-(BOOL)searchForUserByPhone:(NSString *)phone{
+
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+     BOOL isFound = NO ;
+    if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:
+                              @"SELECT PHONE FROM USERS WHERE PHONE = \"%@\" LIMIT 1",phone];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_contactDB,
+                               query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if(sqlite3_step(statement) == SQLITE_ROW){
+                isFound = YES;
+            }
+            
+            sqlite3_finalize(statement);
+        }else{
+            printf("%s",sqlite3_errmsg(_contactDB));
+        }
+        sqlite3_close(_contactDB);
+    }else{
+        printf("Database Connection lost");
+    }
+    return isFound;
+
+}
 //register new user
--(BOOL)RegisterNewUser:(NSString *)name :(NSString *)phone{
-    return  true;
+-(void)RegisterNewUserIfNotExist:(NSString *)name :(NSString *)phone {
+    sqlite3_stmt    *statement;
+    const char *dbpath = [_databasePath UTF8String];
+    if (![self searchForUserByPhone:phone]) {
+        if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+        {
+            
+            NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO USERS (NAME,PHONE) VALUES (\"%@\",\"%@\")",name,phone];
+            const char *insert_stmt = [insertSQL UTF8String];
+            sqlite3_prepare_v2(_contactDB, insert_stmt,
+                               -1, &statement, NULL);
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                printf("Success To register user");
+            } else {
+                printf("%s",sqlite3_errmsg(_contactDB));
+            }
+            sqlite3_finalize(statement);
+            sqlite3_close(_contactDB);
+        }else{
+            printf("Connection lost");
+        }
+
+    }else{
+       // printf("User is already registered");
+    }
+    
+    
 }
 //drop table
 -(void)dropTable{

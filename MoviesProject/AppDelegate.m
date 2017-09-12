@@ -17,8 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSUserDefaults *appUserDefault = [NSUserDefaults standardUserDefaults];
-    [appUserDefault setBool:YES forKey:@"isOffline"];
     
+    [appUserDefault setBool:YES forKey:@"isOffline"];
+
     AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager sharedManager];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
