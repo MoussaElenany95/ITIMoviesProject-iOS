@@ -22,7 +22,7 @@
     
 
     
-    NSString *createdString = [[_movie genre] componentsJoinedByString:@" "];
+    NSString *createdString = [[_movie genre] componentsJoinedByString:@" , "];
     [_genreLabel setText:createdString];
     
     

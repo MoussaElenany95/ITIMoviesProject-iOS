@@ -116,7 +116,7 @@
         if (sqlite3_prepare_v2(_contactDB,
                                query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-
+            NSArray *genreArray ;
             while(sqlite3_step(statement) == SQLITE_ROW)
             {
                 Movie *mov = [Movie new];
@@ -133,8 +133,12 @@
                 [mov setReleaseYear:[[NSString alloc]
                                      initWithUTF8String:(const char *)
                                      sqlite3_column_text(statement, 4)]];
+                
+                genreArray = [[[NSString alloc]
+                               initWithUTF8String:(const char *)
+                               sqlite3_column_text(statement, 5)] componentsSeparatedByString:@","];
+                [mov setGenre:genreArray];
                 [movies addObject:mov];
-              
             }
             sqlite3_finalize(statement);
         }else{
@@ -150,12 +154,15 @@
     if([self moviesTableEmpty] ){
         sqlite3_stmt    *statement;
         const char *dbpath = [_databasePath UTF8String];
-        
+        NSString * genreString ;
         if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
         {
             
             for (int i = 0 ; i< movies.count; i++) {
-                NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MOVIES ( TITLE , IMAGE , RATING ,RELEASEYEAR ) VALUES (\"%@\",\"%@\",\"%@\",\"%@\")",[[movies objectAtIndex:i] title],[[movies objectAtIndex:i] image],[[[movies objectAtIndex:i] rating] stringValue],[[movies objectAtIndex:i] releaseYear]];
+                genreString =[[[movies objectAtIndex:i] genre] componentsJoinedByString:@","];
+                NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MOVIES ( TITLE , IMAGE , RATING ,RELEASEYEAR,GENRE ) VALUES (\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",[[movies objectAtIndex:i] title],[[movies objectAtIndex:i] image],[[[movies objectAtIndex:i] rating] stringValue],[[movies objectAtIndex:i] releaseYear],genreString];
+                
+                //printf("%s",[genreString UTF8String]);
                 const char *insert_stmt = [insertSQL UTF8String];
                 sqlite3_prepare_v2(_contactDB, insert_stmt,
                                    -1, &statement, NULL);

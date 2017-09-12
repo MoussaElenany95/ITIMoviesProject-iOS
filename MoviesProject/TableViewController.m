@@ -93,12 +93,7 @@
     [self.navigationController pushViewController:movieDetailsViewObject animated:YES];
     
 }
--(void)viewDidAppear:(BOOL)animated{
-    //if internet will be aaccessed
-    if (![appUserDefault boolForKey:@"isOffline"]) {
-        [self viewDidLoad];
-    }
-}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
