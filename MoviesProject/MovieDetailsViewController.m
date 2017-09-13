@@ -22,7 +22,7 @@
     
 
     
-    NSString *createdString = [[_movie genre] componentsJoinedByString:@" , "];
+    NSString *createdString = [[_movie genre] componentsJoinedByString:@", "];
     [_genreLabel setText:createdString];
     
     
@@ -40,7 +40,6 @@
 
     starRatingView.tintColor = [UIColor redColor];
     [starRatingView setEnabled:NO];
-    //[starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:starRatingView];
     
 
