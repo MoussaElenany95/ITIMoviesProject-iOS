@@ -111,7 +111,9 @@
     }
     else{
         if (![appUserDefaults boolForKey:@"isOffline"]) {
-            if (![movDb searchForUser:name:phone]) {
+           
+            //Search for user by phone
+            if (![movDb searchForUserByPhone:phone]) {
                 
                 NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
                 AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

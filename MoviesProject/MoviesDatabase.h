@@ -17,6 +17,7 @@
     -(void)insertMovieAtOnece:(NSMutableArray *) movies;
 
     -(NSMutableArray *) showAllMovies;
+    -(BOOL)searchForUserByPhone:(NSString *)phone;
     -(BOOL)searchForUser:(NSString *)name : (NSString *)phone;
     -(BOOL) moviesTableEmpty;
 @end

@@ -185,6 +185,38 @@
     }
 
 }
+
+-(BOOL) searchForUserByPhone:(NSString *)phone{
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    BOOL isFound = NO ;
+    if (sqlite3_open(dbpath, &_contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:
+                              @"SELECT PHONE FROM USERS WHERE  PHONE = \"%@\"  LIMIT 1",phone];
+        printf("in search func ");
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_contactDB,
+                               query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if(sqlite3_step(statement) == SQLITE_ROW){
+                isFound = YES;
+                printf("User IsFound");
+            }else{
+                printf("User not found");
+            }
+            
+            sqlite3_finalize(statement);
+        }else{
+            printf("%s",sqlite3_errmsg(_contactDB));
+        }
+        sqlite3_close(_contactDB);
+    }else{
+        printf("Database Connection lost");
+    }
+    return isFound;
+
+}
 //check if Users table is empty or not
 -(BOOL)searchForUser:(NSString*)name:(NSString *)phone{
     const char *dbpath = [_databasePath UTF8String];
