@@ -14,7 +14,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameLogin;
 @property (weak, nonatomic) IBOutlet UITextField *phoneLogin;
 - (IBAction)signButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 
 @end

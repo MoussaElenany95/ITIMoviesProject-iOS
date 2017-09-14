@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneSign;
 - (IBAction)CreateButton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
+@property (weak, nonatomic) IBOutlet UIButton *createAcountButton;
 
 @end

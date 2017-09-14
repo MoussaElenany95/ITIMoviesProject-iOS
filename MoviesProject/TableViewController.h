@@ -17,7 +17,8 @@
     MoviesDatabase *movDb;
     MovieDetailsViewController *movieDetailsViewObject;
     UIStoryboard *storyboard;
-
+    
+    UIActivityIndicatorView *spinner;
 }
 
 @property NSMutableArray *Movies;

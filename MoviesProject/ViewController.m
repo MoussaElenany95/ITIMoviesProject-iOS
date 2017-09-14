@@ -32,9 +32,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.jpg"]]];
-    movDb = [MoviesDatabase new];
-    
+    [self.spinner setHidden:YES];
+    [self.spinner setColor:[UIColor redColor]];
     appUserDefault =[NSUserDefaults standardUserDefaults];
+    
+    //intialize DataBase
+    movDb =[MoviesDatabase new];
     
     if ([appUserDefault boolForKey:@"isRegistered"]) {
         [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
@@ -55,8 +58,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)loading:(BOOL)isLoading{
+    //Loading
+    if (isLoading) {
+        [self.spinner setHidden:NO];
+        [self.spinner startAnimating];
+        [self.loginButton setEnabled:NO];
+        [self.loginButton setTitle:@"Loading" forState:UIControlStateDisabled];
+    }else{
+        [self.spinner stopAnimating];
+        [self.spinner setHidden:YES];
+        [self.loginButton setEnabled:YES];
+    }
+    
+}
 - (IBAction)signButton:(id)sender {
+    
+    UIAlertController *dataAlert;
+    UIAlertAction *okAction;
+    UIAlertAction *cancelAction;
+    [self loading:YES];
+    //User Inputs
     name=[_nameLogin text];
     phone=[_phoneLogin text];
     NSNumberFormatter *formater =[NSNumberFormatter new];
@@ -65,16 +87,13 @@
     NSNumber *phoneNumber = [formater numberFromString:phone];
     NSNumber *nameNumber  = [formater numberFromString:name];
     
-    UIAlertController *dataAlert;
-    UIAlertAction *okAction;
-    UIAlertAction *cancelAction;
+    
     //check if data successfuly enterd or not
     if ([name isEqualToString:@""] || [phone isEqualToString:@""]) {
                 dataAlert = [UIAlertController alertControllerWithTitle:@"Dismissing data" message:@"Data must be filled" preferredStyle:UIAlertControllerStyleAlert];
         okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             
-            ////////////////////////////////////
-            
+            [self loading:NO];
         }];
         [dataAlert addAction:okAction];
         
@@ -87,7 +106,7 @@
         dataAlert = [UIAlertController alertControllerWithTitle:@"Invalid data" message:@"Please Enter vailed data" preferredStyle:UIAlertControllerStyleAlert];
         okAction =[UIAlertAction actionWithTitle: @"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             
-            ///Ok I understand
+            [self loading:NO];
             
         }];
         [dataAlert addAction:okAction];
@@ -95,20 +114,24 @@
         [self presentViewController:dataAlert animated:YES completion:nil];
     }
     else{
+        
         //Offline alert if conection lost
         dataAlert = [UIAlertController alertControllerWithTitle:@"Connection lost" message:@"No Internet Access" preferredStyle:UIAlertControllerStyleAlert];
         okAction =[UIAlertAction actionWithTitle:@"Go Offline mode" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             [appUserDefault setBool:YES forKey:@"isRegistered"];
                 [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"TableNavigationController"] sender:self];
         }];
-        cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+        cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            //cancel loading state
+            [self loading:NO];
+        }];
 
         [dataAlert addAction:okAction];
         [dataAlert addAction:cancelAction];
         ///////////////////////////////////////
-    
         
-        if([movDb searchForUserByPhone:phone]){
+        //Search for user
+        if([movDb searchForUser:name:phone] ){
             //check if offline or not
             if (![appUserDefault boolForKey:@"isOffline"]) {
                     
@@ -144,13 +167,15 @@
         }else{
             UIAlertController *signUpAlert =[UIAlertController alertControllerWithTitle:@"User not Found" message:@"User not found , Signup now ? " preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *signUpAction =[UIAlertAction actionWithTitle:@"SignUp" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                //stop loading
+                [self loading:NO];
                 //Go to Sign up view
                 [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"signup"] animated:YES];
                 
                 
             }];
             UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                //Cancel
+                [self loading:NO];
                 
             }];
             [signUpAlert addAction:signUpAction];
@@ -163,4 +188,5 @@
     
     }
 }
+
 @end

@@ -9,16 +9,39 @@
 @end
 
 @implementation TableViewController
+-(void)loading:(BOOL)isLoading{
+    //Loading
+    if (isLoading) {
+        [spinner setHidden:NO];
+        [spinner startAnimating];
+        
+    }else{
+        [spinner stopAnimating];
+        [spinner setHidden:YES];
+    }
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [spinner setColor:[UIColor redColor]];
+    [spinner setFrame:CGRectMake(0, 0, 20, 20)];
+    UIBarButtonItem *loadingbutton = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [self navigationItem].rightBarButtonItem = loadingbutton;
+    //loading data;
     movieDetailsViewObject = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsView"];
     
     appUserDefault = [NSUserDefaults standardUserDefaults];
     
     self.Movies=[[NSMutableArray alloc]init];
     movDb =[MoviesDatabase new];
+    [self loading:YES];
     if ([appUserDefault boolForKey:@"isOffline"] == NO) {
+       
+        //loading data;
+
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURL *URL = [NSURL URLWithString:@"https://api.androidhive.info/json/movies.json"];
@@ -31,12 +54,12 @@
                     Movie *movie=[[Movie alloc]initWithDictionary:[responseObject objectAtIndex:i] error:nil];
                     [self.Movies addObject:movie];
                 }
+                [self loading:NO];
                 [self.tableView reloadData];
                 [movDb insertMovieAtOnece:self.Movies];
             }
         }];
         [dataTask resume];
-        
         //double delay=0.1;
         //[NSThread sleepForTimeInterval:delay];
         
@@ -84,7 +107,6 @@
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRefreshCached];
     cell.detailTextLabel.text=movie.releaseYear;
     cell.textLabel.text=movie.title;
-    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

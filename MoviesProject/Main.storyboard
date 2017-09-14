@@ -104,8 +104,12 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tco-3A-D4B">
+                                <rect key="frame" x="142" y="169" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Qev-Fb-wdT" firstAttribute="top" secondItem="tco-3A-D4B" secondAttribute="bottom" constant="8" id="1N4-Uy-gyN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rTj-mF-a9A" secondAttribute="trailing" id="2W9-hd-NVX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="juI-Ax-6Nq" secondAttribute="trailing" constant="56" id="3Pi-GN-DPq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="prl-xk-B8G" secondAttribute="trailing" constant="1" id="6A6-2V-d0s"/>
@@ -117,6 +121,8 @@
                             <constraint firstItem="prl-xk-B8G" firstAttribute="centerY" secondItem="vxP-co-dbc" secondAttribute="centerY" id="Z1X-bi-8hy"/>
                             <constraint firstItem="U5I-9W-bj5" firstAttribute="top" secondItem="prl-xk-B8G" secondAttribute="bottom" constant="22" id="bIo-Yg-Kc2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qev-Fb-wdT" secondAttribute="trailing" id="cUK-hA-Ndn"/>
+                            <constraint firstItem="tco-3A-D4B" firstAttribute="leading" secondItem="jEd-3d-FLZ" secondAttribute="leadingMargin" constant="126" id="eJZ-1t-4g6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tco-3A-D4B" secondAttribute="trailing" constant="125" id="fR4-lu-tRD"/>
                             <constraint firstItem="rTj-mF-a9A" firstAttribute="top" secondItem="Qev-Fb-wdT" secondAttribute="bottom" constant="8" id="gxD-Do-E7B"/>
                             <constraint firstItem="prl-xk-B8G" firstAttribute="leading" secondItem="vxP-co-dbc" secondAttribute="trailing" constant="12" id="kIq-DZ-FGH"/>
                             <constraint firstItem="Qev-Fb-wdT" firstAttribute="top" secondItem="juI-Ax-6Nq" secondAttribute="bottom" constant="59" id="nG7-iL-7v9"/>
@@ -129,13 +135,15 @@
                     <navigationItem key="navigationItem" title="LOGIN" id="0XA-gM-q4p"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="loginButton" destination="YjO-Fr-0ah" id="SnU-wi-Za6"/>
                         <outlet property="nameLogin" destination="Qev-Fb-wdT" id="UCM-tp-I0T"/>
                         <outlet property="phoneLogin" destination="rTj-mF-a9A" id="gdh-u1-M31"/>
+                        <outlet property="spinner" destination="tco-3A-D4B" id="9Pv-7Y-pW2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9i-s8-DfW" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1844" y="357"/>
+            <point key="canvasLocation" x="1845" y="373"/>
         </scene>
         <!--Create Account-->
         <scene sceneID="NCy-Rm-nK5">
@@ -201,17 +209,23 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xmZ-mp-6Ma">
+                                <rect key="frame" x="142" y="136" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="WzX-An-sea" secondAttribute="trailing" id="3uQ-X1-8b2"/>
                             <constraint firstAttribute="leadingMargin" secondItem="qsR-Ev-gpB" secondAttribute="leading" id="4bw-nL-E25"/>
+                            <constraint firstItem="xmZ-mp-6Ma" firstAttribute="leading" secondItem="0dg-cF-8De" secondAttribute="leadingMargin" constant="126" id="6i6-Pw-Q9k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qsR-Ev-gpB" secondAttribute="trailing" id="FDk-Tk-MAW"/>
                             <constraint firstItem="Jx7-d8-kuD" firstAttribute="leading" secondItem="0dg-cF-8De" secondAttribute="leadingMargin" constant="68" id="Fds-uT-1Fh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="DqZ-Kj-f7q" secondAttribute="leading" id="I1R-aW-C0j"/>
+                            <constraint firstItem="DqZ-Kj-f7q" firstAttribute="top" secondItem="xmZ-mp-6Ma" secondAttribute="bottom" constant="27" id="Kd9-Az-usO"/>
                             <constraint firstItem="t9j-wm-PNM" firstAttribute="top" secondItem="Jx7-d8-kuD" secondAttribute="bottom" constant="18" id="MhA-Nv-V13"/>
                             <constraint firstItem="qsR-Ev-gpB" firstAttribute="top" secondItem="WzX-An-sea" secondAttribute="bottom" constant="23" id="bCz-RJ-pxz"/>
                             <constraint firstItem="WzX-An-sea" firstAttribute="top" secondItem="DqZ-Kj-f7q" secondAttribute="bottom" constant="18" id="bp1-9g-PhT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jx7-d8-kuD" secondAttribute="trailing" constant="61" id="cmT-3U-ldV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xmZ-mp-6Ma" secondAttribute="trailing" constant="125" id="kQw-AG-A5w"/>
                             <constraint firstItem="DqZ-Kj-f7q" firstAttribute="top" secondItem="4D5-0q-fjJ" secondAttribute="bottom" constant="136" id="pH6-ca-Kfs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DqZ-Kj-f7q" secondAttribute="trailing" id="toK-f0-Cjj"/>
                             <constraint firstAttribute="leadingMargin" secondItem="WzX-An-sea" secondAttribute="leading" id="yfl-UA-Gb0"/>
@@ -219,8 +233,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Create Account" id="zcn-JJ-Kcy"/>
                     <connections>
+                        <outlet property="createAcountButton" destination="Jx7-d8-kuD" id="M6O-QY-YZW"/>
                         <outlet property="nameSign" destination="DqZ-Kj-f7q" id="mSG-Rg-CZI"/>
                         <outlet property="phoneSign" destination="WzX-An-sea" id="MPO-el-2hB"/>
+                        <outlet property="spinner" destination="xmZ-mp-6Ma" id="iQZ-xe-KfS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbC-RF-68W" sceneMemberID="firstResponder"/>
@@ -272,12 +288,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies" id="aZQ-0s-KvE">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="IfZ-pY-2db">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="IfZ-pY-2db">
                             <connections>
                                 <action selector="logOutPressed:" destination="I1n-gQ-FJe" id="9Zw-6r-wKm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="spinner" destination="aZQ-0s-KvE" id="xcg-hw-97u"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufk-I7-2qI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,6 +373,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Agl-FE-rDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3371.25" y="355.98591549295776"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="35J-F0-aQa">
+            <objects>
+                <viewController id="l0t-iI-eOa" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ng-Is-WuZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sk1-5H-zHj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W3N-XZ-OUo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1v9-GV-Pxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="1019"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="grV-Rf-miV">
