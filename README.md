@@ -1,5 +1,4 @@
 # ITIMoviesProject-iOS
-![Alt text](screnshots/1.png "Login view") 
 Befor  Run , You must install frameworks which be used in .
 To install framworks :
 BY Pod : 
