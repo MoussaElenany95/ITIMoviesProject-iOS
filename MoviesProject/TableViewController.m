@@ -66,6 +66,7 @@
         
         
     }else{
+        [self loading:NO];
         printf("Is offline");
         self.Movies = [movDb showAllMovies];
     }

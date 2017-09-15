@@ -195,10 +195,10 @@
 		4E814EBA1F63E7FB0025AF0A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				761D2CD31F66960100FB11AB /* DetailedMovies */,
 				761D2CD21F6695D000FB11AB /* Login&SignUp */,
 				4E75E8131F65DECF00CB76FC /* MoviesDatabase */,
 				2AEB3AEE1F64DD4000DE09D6 /* TableViewController */,
+				761D2CD31F66960100FB11AB /* DetailedMovies */,
 				4E814EBB1F63E7FB0025AF0A /* main.m */,
 			);
 			name = "Supporting Files";
