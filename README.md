@@ -1,4 +1,11 @@
 # ITIMoviesProject-iOS
+![alt text](1.png "Login view")
+![alt text](2.png "Sign Up view")
+![alt text](3.png "Movies View")
+![alt text](4.png "Movie details view")
+![alt text](5.png "Logout  view")
+![alt text](6.png "Alert view")
+
 Befor  Run , You must install frameworks which be used in .
 To install framworks :
 BY Pod : 
